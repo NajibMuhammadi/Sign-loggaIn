@@ -17,7 +17,8 @@ function SignUp() {
         axios.post('http://localhost:8083/create', {
             FullName: fullname,
             EmailId: email,
-            Password: password
+            Password: password,
+            ConfirmPassword: confirmPassword
         }).then(res => {
             console.log(res.data);
         })
