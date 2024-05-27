@@ -1,28 +1,63 @@
-import React from 'react'
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import './signIn.css';
+import { Link } from 'react-router-dom';
 
 function SignIn() {
-    const [data, setData] = useState([]);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    useEffect(() => {
-        axios.get('http://localhost:8083/')
-            .then(res => setData(res.data))
-            .catch(err => console.log(err))
-    })
-  return (
-    <div className='php__container'>
-    {data.map((item, index) => {
-        return (
-            <div key={index} className='php__data'>
-                <p>{item.FullName}</p>
-                <p>{item.EmailId}</p>
-                <p>{item.Password}</p>
-            </div>
-        )
-    })}
-</div>
-  )
+    const handleSubmit = (event) => {
+        setError('');
+        event.preventDefault();
+        
+
+        axios.post('http://localhost:8083/signin', {
+            EmailId: email,
+            Password: password
+        }).then(res => {
+            console.log(res.data);
+            setEmail('');
+            setPassword('');
+        })
+        .catch(err => {
+            if (err.response) {
+                console.log('Error response data:', err.response.data);
+                setError(err.response.data.error);
+            } else {
+                console.error('Error:', err);
+                setError('An unknown error occurred');
+            }
+        });
+    }
+
+    return (
+        <div className='form__container'>
+            <form className='form' onSubmit={handleSubmit}>
+                <h1 className='form__title'>Sign In</h1>
+                {error && <p className='form__error'>{error}</p>}
+                <input
+                    className='form__input'
+                    type='email'
+                    placeholder='Email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                    className='form__input'
+                    type='password'
+                    placeholder='Password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button className='form__btn' type='submit'>Sign In</button>
+                <p className='form__subtitle'>
+                    Don't have an account? <Link to='/' className='form__subtitle-link'>Sign Up</Link>
+                </p>
+            </form>
+        </div>
+    );
 }
 
-export default SignIn
+export default SignIn;

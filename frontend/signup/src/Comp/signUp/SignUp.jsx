@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './signUp.css';
 import { Link } from 'react-router-dom';
@@ -21,6 +20,10 @@ function SignUp() {
             ConfirmPassword: confirmPassword
         }).then(res => {
             console.log(res.data);
+            setFullname('');
+            setEmail('');
+            setPassword('');
+            setConfirmPassword('');
         })
         .catch(err => {
             console.log(err.response.data);
