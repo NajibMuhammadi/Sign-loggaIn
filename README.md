@@ -5,4 +5,4 @@ _Jag har ännu inte implementerat kontroll av inmatning, så det är möjligt at
 ## _inlogInloggningsida_
 _Just nu har jag inte fixat det, men på inloggningssidan hämtar man all information från databasen._
 
-(https://myoctocat.com/assets/images/base-octocat.svg)
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
