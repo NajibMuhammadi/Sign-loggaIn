@@ -41,7 +41,8 @@ router.post('/', (req, res, next) => {
                         console.error("Database error:", err);
                         return next(new Error('Internal server error'));
                     } else {
-                        return res.status(200).send({ message: 'Data inserted successfully' });
+                        console.error("User created successfully");
+                        return res.status(200).send({ message: 'User created successfully' });
                     }
                 });
             }
