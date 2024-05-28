@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
             const match = await bcrypt.compare(Password, hashedPassword);
             console.log('Password comparison result:', match);
             if (match) {
-                return res.status(200).send({ message: 'User logged in successfully' });
+                return res.status(200).send({ message: 'Login successful' });
             } else {
                 console.log('Incorrect password for email:', EmailId);
                 return res.status(400).send({ error: 'Password!' });

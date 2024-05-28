@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './signIn.css';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         setError('');
@@ -17,9 +19,11 @@ function SignIn() {
             EmailId: email,
             Password: password
         }).then(res => {
-            console.log(res.data);
-            setEmail('');
-            setPassword('');
+            if (res.status === 200) {
+               navigate('/homePage');
+            } else {
+                setError('An unknown error occurred');
+            }
         })
         .catch(err => {
             if (err.response) {

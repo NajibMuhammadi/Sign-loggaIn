@@ -3,6 +3,7 @@ import cors from 'cors';
 import connectDataBase from './db.js';
 import CreateRouter from './routers/CreateRouter.js';
 import LoginRouter from './routers/LoginRouter.js';
+import AdminRouter from './routers/AdminRouter.js';
 
 const app = express();
 const PORT = process.env.PORT || 8083;
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/create', CreateRouter);
 app.use('/signin', LoginRouter);
+app.use('/admin', AdminRouter);
 
 connectDataBase.connect(err => {
     if (err) {
